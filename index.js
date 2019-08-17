@@ -6,6 +6,6 @@ const password = process.env.PASSWORD;
 
 (async () => {
   await ig.initialize();
-  await ig.login("tweefacts", "A.1234567s");
+  await ig.login(username, password);
   debugger;
 })();

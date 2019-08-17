@@ -1,11 +1,16 @@
 const puppeteer = require("puppeteer");
+const device = require("puppeteer/DeviceDescriptors")["iPhone X"];
 
 const BASE_URL = "https://instagram.com/";
 
 const instagram = {
   initialize: async () => {
-    instagram.browser = await puppeteer.launch({ headless: false });
-    instagram.page = await instagram.browser.newPage();
+    instagram.browser = await puppeteer
+      .launch({ headless: false })
+      .then(async browser => {
+        instagram.page = await browser.newPage();
+        await instagram.page.emulate(device);
+      });
   },
 
   login: async (username, password) => {
@@ -16,7 +21,7 @@ const instagram = {
     to querySelectorAll().
      */
 
-    let loginButton = await instagram.page.$(".izU2O a");
+    let loginButton = await instagram.page.$("._0mzm-.sqdOP.L3NKy");
 
     /* Click on the login url button*/
     await loginButton.click();
@@ -32,10 +37,22 @@ const instagram = {
       delay: 100
     });
 
-    let secondLoginButton = await instagram.page.$("button._0mzm-.sqdOP.L3NKy");
+    let secondLoginButton = await instagram.page.$(
+      ".Igw0E.IwRSH.eGOV_._4EzTm.bkEs3.CovQj.jKUp7.DhRcB:nth-last-child(2)"
+    );
+
+    // debugger;
+
+    await instagram.page.waitFor(1000);
 
     /* Click on the login url button*/
     await secondLoginButton.click();
+
+    await instagram.page.waitFor(5000);
+
+    let firstModalBtn = await instagram.page.$("div.mt3GC button.aOOlW.HoLwm");
+
+    await firstModalBtn.click();
 
     debugger;
   }
