@@ -4,6 +4,7 @@
   "description": "Creating an instagram bot with node js &amp; puppeteer",
   "main": "botCommands.js",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "puppeteer": "^1.19.0"
   },
   "devDependencies": {},
