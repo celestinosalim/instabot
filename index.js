@@ -7,5 +7,6 @@ const password = process.env.PASSWORD;
 (async () => {
   await ig.initialize();
   await ig.login(username, password);
+  await ig.post();
   debugger;
 })();
