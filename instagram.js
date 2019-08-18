@@ -1,7 +1,12 @@
+require("dotenv").config();
 const puppeteer = require("puppeteer");
 const device = require("puppeteer/DeviceDescriptors")["iPhone X"];
-
 const BASE_URL = "https://instagram.com/";
+
+//simulating randomly user action.
+function randomNum(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 const instagram = {
   initialize: async () => {
@@ -9,9 +14,7 @@ const instagram = {
       .launch({ args: ["--disable-web-security"], headless: false })
       .then(async browser => {
         instagram.page = await browser.newPage();
-        await instagram.page.setUserAgent(
-          "Mozilla/5.0 (Linux; Android 8.0.0; SM-G960F Build/R16NW) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.84 Mobile Safari/537.36"
-        );
+        await instagram.page.setUserAgent(process.env.USER_AGENT);
 
         await instagram.page.emulate(device);
       });
@@ -63,12 +66,29 @@ const instagram = {
     let uploadButton = await instagram.page.$(
       "div.q02Nz._0TPg span.glyphsSpriteNew_post__outline__24__grey_9.u-__7"
     );
+    await uploadButton.click();
+    await instagram.page.waitFor(3000);
 
-    await uploadButton.click().then(async e => {
-      await console.log(e);
+    const fileInput = await instagram.page.$("input[type=file]");
+    await fileInput.uploadFile("./image1.jpg");
+    await instagram.page.waitFor(5000);
+
+    let nextButton = await instagram.page.$(".UP43G");
+    await nextButton.click();
+
+    await instagram.page.waitFor(5000);
+    let textArea = await instagram.page.$("textarea._472V_");
+    await textArea.click();
+    await instagram.page.keyboard.type(`Posting From Node # 1`, {
+      delay: 100
     });
 
-    debugger;
+    // debugger;
+    await instagram.page.waitFor(5000);
+    let shareButton = await instagram.page.$(".UP43G");
+    await shareButton.click();
+
+    // debugger;
   },
   post: async () => {
     await instagram.page.waitForNavigation({ waitUntil: "networkidle2" });
