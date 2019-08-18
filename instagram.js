@@ -4,7 +4,7 @@ const device = require("puppeteer/DeviceDescriptors")["iPhone X"];
 const BASE_URL = "https://instagram.com/";
 
 //simulating randomly user action.
-function randomNum(min, max) {
+function randomWait(min, max) {
   return Math.random() * (max - min) + min;
 }
 
@@ -50,48 +50,46 @@ const instagram = {
 
     // debugger;
 
-    await instagram.page.waitFor(1000);
+    await instagram.page.waitFor(randomWait(2000, 5000));
 
     /* Click on the login url button*/
     await secondLoginButton.click();
 
     /* Wait until instagram loads the modal.*/
-    await instagram.page.waitFor(5000);
+    await instagram.page.waitFor(randomWait(2000, 5000));
 
     /* Finds the cancel button*/
     let firstModalBtn = await instagram.page.$("div.mt3GC button.aOOlW.HoLwm");
 
     await firstModalBtn.click();
-
+    await instagram.page.waitFor(randomWait(2000, 3000));
+    // debugger;
+  },
+  postPhoto: async () => {
     let uploadButton = await instagram.page.$(
       "div.q02Nz._0TPg span.glyphsSpriteNew_post__outline__24__grey_9.u-__7"
     );
     await uploadButton.click();
-    await instagram.page.waitFor(3000);
+    await instagram.page.waitFor(randomWait(2000, 3500));
 
     const fileInput = await instagram.page.$("input[type=file]");
     await fileInput.uploadFile("./image1.jpg");
-    await instagram.page.waitFor(5000);
+    await instagram.page.waitFor(randomWait(2000, 5000));
 
     let nextButton = await instagram.page.$(".UP43G");
     await nextButton.click();
 
-    await instagram.page.waitFor(5000);
+    await instagram.page.waitFor(randomWait(2000, 5000));
     let textArea = await instagram.page.$("textarea._472V_");
     await textArea.click();
-    await instagram.page.keyboard.type(`Posting From Node # 1`, {
+    await instagram.page.keyboard.type(`Posting From Node random facts `, {
       delay: 100
     });
 
     // debugger;
-    await instagram.page.waitFor(5000);
+    await instagram.page.waitFor(randomWait(2000, 5000));
     let shareButton = await instagram.page.$(".UP43G");
     await shareButton.click();
-
-    // debugger;
-  },
-  post: async () => {
-    await instagram.page.waitForNavigation({ waitUntil: "networkidle2" });
   }
 };
 
