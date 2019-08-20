@@ -34,7 +34,7 @@ const login = async (username, password, page, BASE_URL, randomWait) => {
   await secondLoginButton.click();
 
   /* Wait until instagram loads the modal.*/
-  await page.waitFor(randomWait(3000, 5000));
+  await page.waitFor(randomWait(6000, 8000));
 
   /* Finds the cancel button*/
   let firstModalBtn = await page.$("div.mt3GC button.aOOlW.HoLwm");
