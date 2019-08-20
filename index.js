@@ -13,7 +13,7 @@ function randomWait(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-// setInterval(() => {
+setInterval(() => {
   (async () => {
     await puppeteer
       .launch({ args: ["--disable-web-security"] })
@@ -29,5 +29,4 @@ function randomWait(min, max) {
       });
     // debugger;
   })();
-}
-// , 60000 * 60 * 12);
+}, 60000 * 60 * 12);
