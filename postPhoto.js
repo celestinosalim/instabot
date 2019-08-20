@@ -31,11 +31,10 @@ const postPhoto = async (page, randomWait) => {
   let textArea = await page.$("textarea._472V_");
   await textArea.click();
 
-  await page.keyboard.type(`\n ${message} \n by: ${author}`, {
+  await page.keyboard.type(`${message} \n by: ${author}`, {
     delay: 100
   });
 
-  debugger;
   await page.waitFor(randomWait(1000, 3000));
   let shareButton = await page.$(".UP43G");
   await shareButton.click();
