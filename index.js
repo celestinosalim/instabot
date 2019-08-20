@@ -15,26 +15,26 @@ function randomWait(min, max) {
 
 console.log("hello world");
 
-setInterval(async () => {
-  (async () => {
-    await puppeteer
-      .launch({
-        args: [
-          "--disable-web-security",
-          "--no-sandbox",
-          "--disable-setuid-sandbox"
-        ]
-      })
-      .then(async browser => {
-        page = await browser.newPage();
-        await page.setUserAgent(process.env.USER_AGENT);
-        await page.emulate(device);
-        await login(username, password, page, BASE_URL, randomWait);
-        await postPhoto(page, randomWait);
-        await page.waitFor(10000);
-        await page.close();
-        await browser.close();
-      });
-    // debugger;
-  })();
-}, 60000 * 3);
+// setInterval(async () => {
+(async () => {
+  await puppeteer
+    .launch({
+      args: [
+        "--disable-web-security",
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ]
+    })
+    .then(async browser => {
+      page = await browser.newPage();
+      await page.setUserAgent(process.env.USER_AGENT);
+      await page.emulate(device);
+      await login(username, password, page, BASE_URL, randomWait);
+      await postPhoto(page, randomWait);
+      await page.waitFor(10000);
+      await page.close();
+      await browser.close();
+    });
+  // debugger;
+})();
+// }, 60000 * 3);
