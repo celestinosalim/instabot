@@ -15,7 +15,7 @@ function randomWait(min, max) {
 
 console.log("hello world");
 
-setInterval(() => {
+setInterval(async () => {
   (async () => {
     await puppeteer
       .launch({
