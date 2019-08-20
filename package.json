@@ -1,6 +1,9 @@
 {
   "name": "instabot",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.2.1"
+  },
   "description": "Creating an instagram bot with node js &amp; puppeteer",
   "main": "botCommands.js",
   "dependencies": {
