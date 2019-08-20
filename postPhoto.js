@@ -1,4 +1,12 @@
+require("dotenv").config();
+let getImages = require("./getImages");
+
 const postPhoto = async (page, randomWait) => {
+  await getImages(process.env.IMAGE_API, "./image.jpg", () =>
+    console.log("done")
+  );
+  let image = await "./image.jpg";
+
   let uploadButton = await page.$(
     "div.q02Nz._0TPg span.glyphsSpriteNew_post__outline__24__grey_9.u-__7"
   );
@@ -6,7 +14,7 @@ const postPhoto = async (page, randomWait) => {
   await page.waitFor(randomWait(2000, 3500));
 
   const fileInput = await page.$("input[type=file]");
-  await fileInput.uploadFile("./image1.jpg");
+  await fileInput.uploadFile(image);
   await page.waitFor(randomWait(1000, 3000));
 
   let nextButton = await page.$(".UP43G");
@@ -19,7 +27,7 @@ const postPhoto = async (page, randomWait) => {
     delay: 100
   });
 
-  // debugger;
+  debugger;
   await page.waitFor(randomWait(1000, 3000));
   let shareButton = await page.$(".UP43G");
   await shareButton.click();
