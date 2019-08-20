@@ -38,6 +38,12 @@ const postPhoto = async (page, randomWait) => {
   await page.waitFor(randomWait(1000, 3000));
   let shareButton = await page.$(".UP43G");
   await shareButton.click();
+
+  await page.waitFor(randomWait(8000, 10000));
+
+  let notification = await page.$(".aOOlW.HoLwm");
+
+  await notification.click();
 };
 
 module.exports = postPhoto;

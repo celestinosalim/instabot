@@ -13,7 +13,7 @@ const login = async (username, password, page, BASE_URL, randomWait) => {
 
   await page.waitForNavigation({ waitUntil: "networkidle2" });
 
-  await page.waitFor(randomWait(1000, 3000));
+  await page.waitFor(randomWait(3000, 4000));
 
   await page.type('input[name="username"]', username, {
     delay: 100
@@ -28,19 +28,20 @@ const login = async (username, password, page, BASE_URL, randomWait) => {
 
   // debugger;
 
-  await page.waitFor(randomWait(2000, 3000));
+  await page.waitFor(randomWait(2000, 4000));
 
   /* Click on the login url button*/
   await secondLoginButton.click();
 
   /* Wait until instagram loads the modal.*/
-  await page.waitFor(randomWait(2000, 3000));
+  await page.waitFor(randomWait(3000, 5000));
 
   /* Finds the cancel button*/
   let firstModalBtn = await page.$("div.mt3GC button.aOOlW.HoLwm");
 
   await firstModalBtn.click();
-  await page.waitFor(randomWait(2000, 3000));
+
+  await page.waitFor(randomWait(3000, 5000));
   // debugger;
 };
 
