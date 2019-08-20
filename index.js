@@ -13,20 +13,20 @@ function randomWait(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-setInterval(() => {
-  (async () => {
-    await puppeteer
-      .launch({ args: ["--disable-web-security"] })
-      .then(async browser => {
-        page = await browser.newPage();
-        await page.setUserAgent(process.env.USER_AGENT);
-        await page.emulate(device);
-        await login(username, password, page, BASE_URL, randomWait);
-        await postPhoto(page, randomWait);
-        await page.waitFor(10000);
-        await page.close();
-        await browser.close();
-      });
-    // debugger;
-  })();
-}, 60000 * 60 * 12);
+// setInterval(() => {
+(async () => {
+  await puppeteer
+    .launch({ args: ["--disable-web-security"], headless: false })
+    .then(async browser => {
+      page = await browser.newPage();
+      await page.setUserAgent(process.env.USER_AGENT);
+      await page.emulate(device);
+      await login(username, password, page, BASE_URL, randomWait);
+      await postPhoto(page, randomWait);
+      await page.waitFor(10000);
+      await page.close();
+      await browser.close();
+    });
+  // debugger;
+})();
+// }, 60000 * 60 * 12);
