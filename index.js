@@ -16,7 +16,7 @@ function randomWait(min, max) {
 setInterval(() => {
   (async () => {
     await puppeteer
-      .launch({ args: ["--disable-web-security"] })
+      .launch({ args: ["--disable-web-security"])
       .then(async browser => {
         page = await browser.newPage();
         await page.setUserAgent(process.env.USER_AGENT);

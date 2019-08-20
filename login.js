@@ -6,6 +6,8 @@ const login = async (username, password, page, BASE_URL, randomWait) => {
     to querySelectorAll().
      */
 
+  await page.waitFor(randomWait(5000, 8000));
+
   let loginButton = await page.$("._0mzm-.sqdOP.L3NKy");
 
   /* Click on the login url button*/
@@ -13,7 +15,7 @@ const login = async (username, password, page, BASE_URL, randomWait) => {
 
   await page.waitForNavigation({ waitUntil: "networkidle2" });
 
-  await page.waitFor(randomWait(3000, 4000));
+  await page.waitFor(randomWait(5000, 8000));
 
   await page.type('input[name="username"]', username, {
     delay: 100
