@@ -44,7 +44,7 @@ app.get("/", function(req, res) {
         .catch(err => console.log(err));
       // debugger;
     })();
-  }, 60000 * 3);
+  }, 60000 * 10);
 });
 
 function randomWait(min, max) {
