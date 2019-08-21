@@ -44,8 +44,11 @@ const postPhoto = async (page, randomWait) => {
     await page.waitFor(randomWait(8000, 10000));
 
     let notification = await page.$(".aOOlW.HoLwm");
-
-    await notification.click();
+    if (notification) {
+      await notification.click();
+    } else {
+      await page.waitFor(randomWait(3500, 5000));
+    }
   } else {
     await page.waitFor(randomWait(5000, 8000));
   }
