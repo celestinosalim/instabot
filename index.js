@@ -41,7 +41,8 @@ setInterval(() => {
         await page.waitFor(10000);
         await page.close();
         await browser.close();
-      });
+      })
+      .catch(err => console.log(err));
     // debugger;
   })();
 }, 60000 * 3);
