@@ -45,4 +45,4 @@ setInterval(() => {
       .catch(err => console.log(err));
     // debugger;
   })();
-}, 60000 * 3);
+}, 60000 * 60 * 3);
