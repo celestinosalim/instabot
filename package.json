@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Creating an instagram bot with node js &amp; puppeteer",
   "main": "index.js",
+  "engines": {
+    "node": "8.2.1"
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "dotenv": "^8.0.0",
+    "express": "^4.17.1",
     "puppeteer": "^1.19.0",
     "request": "^2.88.0"
   },
