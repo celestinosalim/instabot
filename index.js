@@ -30,7 +30,7 @@ setInterval(() => {
           "--disable-setuid-sandbox",
           "--disable-web-security"
         ],
-        headless: false
+        headless: true
       })
       .then(async browser => {
         page = await browser.newPage();
