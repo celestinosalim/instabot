@@ -17,33 +17,38 @@ const postPhoto = async (page, randomWait) => {
   let uploadButton = await page.$(
     "div.q02Nz._0TPg span.glyphsSpriteNew_post__outline__24__grey_9.u-__7"
   );
-  await uploadButton.click();
-  await page.waitFor(randomWait(3500, 5000));
 
-  const fileInput = await page.$("input[type=file]");
-  await fileInput.uploadFile(image);
-  await page.waitFor(randomWait(3000, 5000));
+  if (uploadButton) {
+    await uploadButton.click();
+    await page.waitFor(randomWait(3500, 5000));
 
-  let nextButton = await page.$(".UP43G");
-  await nextButton.click();
+    const fileInput = await page.$("input[type=file]");
+    await fileInput.uploadFile(image);
+    await page.waitFor(randomWait(3000, 5000));
 
-  await page.waitFor(randomWait(2000, 3000));
-  let textArea = await page.$("textarea._472V_");
-  await textArea.click();
+    let nextButton = await page.$(".UP43G");
+    await nextButton.click();
 
-  await page.keyboard.type(`${message} \n by: ${author}`, {
-    delay: 100
-  });
+    await page.waitFor(randomWait(2000, 3000));
+    let textArea = await page.$("textarea._472V_");
+    await textArea.click();
 
-  await page.waitFor(randomWait(2000, 3000));
-  let shareButton = await page.$(".UP43G");
-  await shareButton.click();
+    await page.keyboard.type(`${message} \n by: ${author}`, {
+      delay: 100
+    });
 
-  await page.waitFor(randomWait(8000, 10000));
+    await page.waitFor(randomWait(2000, 3000));
+    let shareButton = await page.$(".UP43G");
+    await shareButton.click();
 
-  let notification = await page.$(".aOOlW.HoLwm");
+    await page.waitFor(randomWait(8000, 10000));
 
-  await notification.click();
+    let notification = await page.$(".aOOlW.HoLwm");
+
+    await notification.click();
+  } else {
+    await page.waitFor(randomWait(5000, 8000));
+  }
 };
 
 module.exports = postPhoto;
