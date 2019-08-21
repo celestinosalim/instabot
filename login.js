@@ -9,42 +9,46 @@ const login = async (username, password, page, BASE_URL, randomWait) => {
   let loginButton = await page.$("._0mzm-.sqdOP.L3NKy");
 
   /* Click on the login url button*/
-  await loginButton.click();
+  if (loginButton) {
+    await loginButton.click();
 
-  await page.waitForNavigation({ waitUntil: "networkidle2" });
+    await page.waitForNavigation({ waitUntil: "networkidle2" });
 
-  await page.waitFor(randomWait(3000, 4000));
+    await page.waitFor(randomWait(3000, 4000));
 
-  await page.type('input[name="username"]', username, {
-    delay: 100
-  });
-  await page.type('input[name="password"]', password, {
-    delay: 100
-  });
+    await page.type('input[name="username"]', username, {
+      delay: 100
+    });
+    await page.type('input[name="password"]', password, {
+      delay: 100
+    });
 
-  let secondLoginButton = await page.$(
-    ".Igw0E.IwRSH.eGOV_._4EzTm.bkEs3.CovQj.jKUp7.DhRcB:nth-last-child(2)"
-  );
+    let secondLoginButton = await page.$(
+      ".Igw0E.IwRSH.eGOV_._4EzTm.bkEs3.CovQj.jKUp7.DhRcB:nth-last-child(2)"
+    );
 
-  // debugger;
+    // debugger;
 
-  await page.waitFor(randomWait(3000, 4000));
+    await page.waitFor(randomWait(3000, 4000));
 
-  /* Click on the login url button*/
-  await secondLoginButton.click();
+    /* Click on the login url button*/
+    await secondLoginButton.click();
 
-  /* Wait until instagram loads the modal.*/
-  await page.waitFor(randomWait(8000, 10000));
+    /* Wait until instagram loads the modal.*/
+    await page.waitFor(randomWait(8000, 10000));
 
-  /* Finds the cancel button*/
-  let firstModalBtn = await page.$("div.mt3GC button.aOOlW.HoLwm");
+    /* Finds the cancel button*/
+    let firstModalBtn = await page.$("div.mt3GC button.aOOlW.HoLwm");
 
-  await page.waitFor(randomWait(8000, 10000));
+    await page.waitFor(randomWait(8000, 10000));
 
-  (await firstModalBtn) && firstModalBtn.click();
+    (await firstModalBtn) && firstModalBtn.click();
 
-  await page.waitFor(randomWait(5000, 8000));
-  // debugger;
+    await page.waitFor(randomWait(5000, 8000));
+    // debugger;
+  } else {
+    await page.waitFor(randomWait(3000, 5000));
+  }
 };
 
 module.exports = login;
