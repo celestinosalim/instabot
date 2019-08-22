@@ -20,31 +20,31 @@ app.listen(port, function() {
 app.get("/", function(req, res) {
   res.send("hello world");
 
-  setInterval(() => {
-    (async () => {
-      await puppeteer
-        .launch({
-          args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox",
-            "--disable-web-security"
-          ],
-          headless: true
-        })
-        .then(async browser => {
-          page = await browser.newPage();
-          await page.setUserAgent(process.env.USER_AGENT);
-          await page.emulate(device);
-          await login(username, password, page, BASE_URL, randomWait);
-          await postPhoto(page, randomWait);
-          await page.waitFor(10000);
-          await page.close();
-          await browser.close();
-        })
-        .catch(err => console.log(err));
-      // debugger;
-    })();
-  }, 60000 * 10);
+  // setInterval(() => {
+  (async () => {
+    await puppeteer
+      .launch({
+        args: [
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-web-security"
+        ],
+        headless: true
+      })
+      .then(async browser => {
+        page = await browser.newPage();
+        await page.setUserAgent(process.env.USER_AGENT);
+        await page.emulate(device);
+        await login(username, password, page, BASE_URL, randomWait);
+        await postPhoto(page, randomWait);
+        await page.waitFor(10000);
+        await page.close();
+        await browser.close();
+      })
+      .catch(err => console.log(err));
+    // debugger;
+  })();
+  // }, 60000 * 10);
 });
 
 function randomWait(min, max) {
