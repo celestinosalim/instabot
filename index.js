@@ -18,9 +18,10 @@ app.listen(port, function() {
 });
 
 app.get("/hello", function(req, res) {
-  res.send("hello world");
+  res.send(
+    "hello world",
 
-  setInterval(() => {
+    // setInterval(() => {
     (async () => {
       await puppeteer
         .launch({
@@ -43,8 +44,9 @@ app.get("/hello", function(req, res) {
         })
         .catch(err => console.log(err));
       // debugger;
-    })();
-  }, 60000 * 60 * 8);
+    })()
+  );
+  // }, 60000 * 60 * 8);
 });
 
 function randomWait(min, max) {
